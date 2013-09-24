@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/impress.css" rel="stylesheet" />
+</head>
+<body>
+<div id="impress" class="impress-not-supported">
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b> or <b>Safari</b> browser. Firefox 10 (to be released soon) will also handle it.</p>
+    </div>
+
+<div class="step" id="title" data-x="0" data-y="0">
+<h2>DBIx::RecordFactory</h2>
+
+<ul>
+<li>id: walf443</li>
+</ul>
+
+</div>
+<div class="step" data-y="0" data-x="1200">
+<h2>There are too many DBIx::*</h2>
+
+<pre><code>やあ （´・ω・｀)
+ようこそ、バーボンハウスへ。
+このテキーラはサービスだから、まず飲んで落ち着いて欲しい。
+
+うん、「また」なんだ。済まない。
+
+じゃあ、注文を聞こうか。
+</code></pre>
+
+</div>
+<div data-y="0" data-x="2400" class="step">
+<h2>SYNOPSIS</h2>
+
+<pre><code>$f = DBIx::RecordFactory-&gt;new(teng =&gt; $teng);
+DBIx::RecordFactory::RuleSet::ActiveRecord-&gt;apply(factory =&gt; $f);
+
+my $photo = $f-&gt;build("photo");
+$photo = $f-&gt;insert("photo", album_type =&gt; MEMBER_ONLY);
+# =&gt; {
+#     id =&gt; 1,
+#     character_id =&gt; 1,
+#     album_type =&gt; MEMBER_ONLY,
+#     title_id =&gt; 1,
+# }
+#
+</code></pre>
+
+</div>
+<div data-y="0" data-x="3600" class="step">
+<h2>お手軽に関連データを作りたい</h2>
+
+<ul>
+<li>fixtureつくるのしんどい</li>
+<li>rubyのFactoryGirlっぽいやつ</li>
+<li>Tengのschemaからルールを自動生成</li>
+<li>int型のカラムならランダムな数字</li>
+<li>varchar型のカラムならランダムな文字列</li>
+<li>primary keyはsequenceになる</li>
+<li>{$table}_idだったら、関連テーブルにデータを作成</li>
+</ul>
+
+</div>
+<div data-x="4800" data-y="0" class="step">
+<h2>Why Teng?</h2>
+
+<ul>
+<li>Tengつかってないプロジェクトでも比較的導入がしやすそう</li>
+<li>最初DBIx::Inspectorでやろうとしてたけど、テーブル数が増えてくると重くなりがち</li>
+<li>自動ルール生成は、とりあえずmysqlのみで動作確認している。</li>
+<li>SQLiteで動かないのは確認している。</li>
+</ul>
+
+</div>
+<div data-y="800" data-x="0" class="step">
+<h2>レールの上に乗れないときは</h2>
+
+<pre><code>$f-&gt;redefine(character =&gt; {
+    name =&gt; sub { $_[0]-&gt;choice(
+        map { Encode::utf_utf8($_-&gt;name) } Acme::PrettyCure-&gt;girls('AllStar')
+    ) },
+},
+    table =&gt; 'character_master',
+);
+# $_[0] is a DBIx::RecordFactory.
+</code></pre>
+
+</div>
+<div data-y="800" data-x="1200" class="step">
+<h2>Thanks</h2>
+
+<ul>
+<li>https://github.com/walf443/p5-dbix-record_factory</li>
+<li>まだまだアルファクオリティ</li>
+<li>pixivでperl/ruby/php書いてます</li>
+<li>cure/worldcosplayというサイトがperlで動いています</li>
+<li>エンジニアを募集しています。</li>
+</ul>
+
+</div>
+
+
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+<script src="js/impress.js"></script>
+
+</body>
+</html>
+
